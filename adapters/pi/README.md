@@ -1,20 +1,66 @@
-# Pi adapter sketch
+# Pi adapter
 
-Pi should stay a thin adapter.
+This directory now contains a working thin Pi adapter.
 
-## Recommended shape
+## Files
 
-- load `skills/` from this repo
-- expose repo-local script commands as Pi commands
-- optionally add a tiny extension that points Pi to the shared skills/prompts
-- do **not** reimplement validation or scaffolding logic inside the extension
+- `extension.ts` — the adapter implementation
 
-## Minimal integration ideas
+## What it does
 
-- `resources_discover` → add this repo's `skills/` and `prompts/`
-- command `/openspec-propose` → call `scripts/openspec-propose`
-- command `/openspec-archive` → call `scripts/openspec-archive-preflight`
+The adapter intentionally keeps Pi-specific logic thin.
 
-## Why
+It does **not** reimplement the workflow core. Instead it:
 
-The reusable contract should live in the workflow scripts and policy overlay, not in Pi-specific code.
+- exposes the repo's shared `skills/` and `prompts/`
+- registers wrapper slash commands
+- registers one `openspec_workflow` tool for agent-side use
+- shells out to the shared repo scripts under `scripts/`
+
+## Commands
+
+- `/openspec-propose`
+- `/openspec-build-source-manifest`
+- `/openspec-generate-explainer`
+- `/openspec-validate-explainer`
+- `/openspec-validate-source-manifest`
+- `/openspec-archive-preflight`
+
+## Tool
+
+- `openspec_workflow`
+
+Actions:
+
+- `propose`
+- `build-source-manifest`
+- `generate-explainer`
+- `validate-explainer`
+- `validate-source-manifest`
+- `archive-preflight`
+
+## Install into Pi
+
+From the local repo:
+
+```bash
+pi install /home/shawn/projects/active/openspec-workflow
+```
+
+From GitHub:
+
+```bash
+pi install git:github.com/a5345534/openspec-workflow
+```
+
+Then reload Pi if it is already running:
+
+```text
+/reload
+```
+
+## Design rule
+
+If the workflow contract changes, update the shared scripts / schemas / policy behavior first.
+
+Only update this adapter when Pi-specific ergonomics need to change.

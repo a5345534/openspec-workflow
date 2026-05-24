@@ -1,0 +1,23 @@
+{
+  "name": "openspec-workflow",
+  "version": "0.1.0",
+  "description": "Harness-neutral workflow core for OpenSpec-style change authoring",
+  "license": "MIT",
+  "keywords": [
+    "pi-package",
+    "agent-skills",
+    "openspec",
+    "workflow"
+  ],
+  "pi": {
+    "extensions": [
+      "./adapters/pi/extension.ts"
+    ]
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-ai": "*",
+    "@earendil-works/pi-coding-agent": "*",
+    "@earendil-works/pi-tui": "*",
+    "typebox": "*"
+  }
+}
