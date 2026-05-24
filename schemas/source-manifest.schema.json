@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openspec-workflow.local/schemas/source-manifest.schema.json",
+  "title": "OpenSpec Workflow Source Manifest",
+  "description": "Governed manifest for the markdown/spec inputs used to generate a change explainer.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "changeName", "generatedAt", "sources"],
+  "properties": {
+    "schemaVersion": {"type": "string", "const": "1.0"},
+    "changeName": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$"},
+    "generatedAt": {"type": "string", "minLength": 1},
+    "sources": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/source"}
+    }
+  },
+  "$defs": {
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "kind", "sha256"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "kind": {
+          "type": "string",
+          "enum": ["proposal", "design", "tasks", "spec-delta"]
+        },
+        "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+      }
+    }
+  }
+}

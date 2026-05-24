@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openspec-workflow.local/schemas/project-policy.schema.json",
+  "title": "OpenSpec Workflow Project Policy",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "version": {"type": "integer", "const": 1},
+    "project": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "changesDir": {"type": "string"},
+        "specsDir": {"type": "string"}
+      }
+    },
+    "changeExplainer": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "required": {"type": "boolean"},
+        "locale": {"type": "string"},
+        "requiredSections": {
+          "type": "array",
+          "items": {"type": "string"},
+          "minItems": 1
+        },
+        "minimumCjkChars": {"type": "integer", "minimum": 0},
+        "backend": {"type": "string", "enum": ["template", "opendesign"]},
+        "requireViewportMeta": {"type": "boolean"},
+        "allowRemoteDependencies": {"type": "boolean"},
+        "skipBrowserLayoutCheckEnv": {"type": "string"},
+        "openDesign": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "daemonUrl": {"type": "string"},
+            "projectPrefix": {"type": "string"},
+            "agentId": {"type": "string"},
+            "skillId": {"type": "string"}
+          }
+        }
+      }
+    },
+    "archive": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "requireExplainer": {"type": "boolean"},
+        "requireNoUncheckedTasks": {"type": "boolean"},
+        "legacyPolicyStart": {"type": "string"},
+        "backlogMarkers": {
+          "type": "array",
+          "items": {"type": "string"},
+          "minItems": 1
+        }
+      }
+    }
+  }
+}

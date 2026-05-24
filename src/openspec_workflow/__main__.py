@@ -1,0 +1,5 @@
+from openspec_workflow.cli import main
+
+
+if __name__ == "__main__":
+    main()

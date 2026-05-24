@@ -1,0 +1,36 @@
+version: 1
+project:
+  changesDir: openspec/changes
+  specsDir: openspec/specs
+
+changeExplainer:
+  required: true
+  locale: zh-Hant
+  requiredSections:
+    - why
+    - what-changes
+    - before-after
+    - flow
+    - affected-surfaces
+    - scope-boundaries
+    - rollout
+    - current-status
+  minimumCjkChars: 24
+  backend: template
+  requireViewportMeta: true
+  allowRemoteDependencies: false
+  skipBrowserLayoutCheckEnv: OPENSPEC_WORKFLOW_SKIP_BROWSER_LAYOUT_CHECK
+  openDesign:
+    daemonUrl: http://127.0.0.1:7456
+    projectPrefix: openspec-workflow-demo
+
+archive:
+  requireExplainer: true
+  requireNoUncheckedTasks: true
+  backlogMarkers:
+    - backlog
+    - follow-up
+    - follow up
+    - 後續
+    - 待辦
+    - 另案
